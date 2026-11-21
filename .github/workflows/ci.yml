@@ -23,7 +23,7 @@ jobs:
         node: ["22.12", "24"]
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 10.34.9
       - uses: actions/setup-node@v4
@@ -50,7 +50,7 @@ jobs:
     needs: verify
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 10.34.9
       - uses: actions/setup-node@v4
@@ -78,7 +78,7 @@ jobs:
     needs: verify
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 10.34.9
       - uses: actions/setup-node@v4
