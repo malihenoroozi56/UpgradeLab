@@ -65,7 +65,7 @@ jobs:
         run: UPGRADELAB_TEST_DOCKER=1 pnpm test:docker
       - name: Upload reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: upgradelab-docker-reports
           path: .upgradelab/reports
@@ -95,7 +95,7 @@ jobs:
           config: upgradelab.yaml
           report-formats: json,markdown,junit
           fail-on: failed,inconclusive
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: upgradelab-action-reports
