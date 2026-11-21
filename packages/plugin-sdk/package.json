@@ -1,0 +1,27 @@
+{
+  "name": "@upgradelab/plugin-sdk",
+  "version": "1.0.0-dev.0",
+  "description": "Plugin loading, validation and registration contracts for UpgradeLab.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@upgradelab/contracts": "workspace:*"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

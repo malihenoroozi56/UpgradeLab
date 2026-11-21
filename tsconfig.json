@@ -1,0 +1,17 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/contracts" },
+    { "path": "packages/config" },
+    { "path": "packages/core" },
+    { "path": "packages/assertion-engine" },
+    { "path": "packages/database-postgres" },
+    { "path": "packages/docker-compose-provider" },
+    { "path": "packages/reporters" },
+    { "path": "packages/plugin-sdk" },
+    { "path": "packages/ai-assistant" },
+    { "path": "examples/plugins/csv-reporter" },
+    { "path": "apps/cli" },
+    { "path": "apps/github-action" }
+  ]
+}

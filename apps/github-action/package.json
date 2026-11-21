@@ -1,0 +1,21 @@
+{
+  "name": "@upgradelab/github-action",
+  "version": "1.0.0-dev.0",
+  "private": true,
+  "description": "Official UpgradeLab GitHub Action.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "main": "./dist/lib/index.js",
+  "scripts": {
+    "build": "tsc -b",
+    "bundle": "node ../../scripts/build-action.mjs"
+  },
+  "dependencies": {
+    "@actions/core": "3.0.1",
+    "@upgradelab/cli": "workspace:*",
+    "@upgradelab/contracts": "workspace:*"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

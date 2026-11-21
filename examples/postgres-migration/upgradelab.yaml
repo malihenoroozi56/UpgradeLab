@@ -1,0 +1,79 @@
+schemaVersion: 1
+
+project:
+  name: postgres-migration
+  description: Verify a PostgreSQL schema migration with SQL assertions and invariants.
+
+environment:
+  composeFile: ./docker-compose.yml
+  application:
+    service: app
+    port: 3000
+    healthcheck:
+      type: http
+      path: /health
+  database:
+    service: db
+    adapter: postgres
+    port: 5432
+    database: upgradelab
+    user: upgradelab
+    password: ${UPGRADELAB_DB_PASSWORD:-upgradelab}
+    statementTimeoutMs: 15000
+  resources:
+    memoryLimit: 512m
+    cpus: 1
+    pidsLimit: 100
+  network:
+    bindAddress: 127.0.0.1
+  timeouts:
+    startMs: 120000
+    readinessMs: 120000
+
+scenarios:
+  - id: schema-migration
+    description: The 2.0.0 migration keeps rows, creates audit_log and records its run.
+    from:
+      image: upgradelab-sample-app:1.0.0
+      setup:
+        - target: app
+          command: ["node", "/app/seed.mjs"]
+    to:
+      image: upgradelab-sample-app:2.0.0
+    invariants:
+      - id: user-rows-unchanged
+        type: sql
+        query: SELECT COUNT(*) FROM users
+        comparison: equal-before-after
+      - id: balance-total-unchanged
+        type: sql
+        query: SELECT SUM(balance) FROM accounts
+        comparison: numeric-equal-before-after
+    assertions:
+      - id: email-column-still-there
+        type: sql
+        description: A backwards-compatible migration must not drop the email column.
+        query: >-
+          SELECT COUNT(*) FROM information_schema.columns
+          WHERE table_name = 'users' AND column_name = 'email'
+        expected: 1
+      - id: created-at-column-added
+        type: sql
+        query: >-
+          SELECT COUNT(*) FROM information_schema.columns
+          WHERE table_name = 'users' AND column_name = 'created_at'
+        expected: 1
+      - id: audit-log-created
+        type: sql
+        query: SELECT COUNT(*) FROM audit_log
+        comparison: at-least
+        expected: 1
+      - id: migration-recorded
+        type: sql
+        query: SELECT COUNT(*) FROM schema_migrations WHERE version = '002_add_audit_log.sql'
+        expected: 1
+      - id: health-endpoint
+        type: http
+        path: /health
+        jsonPath: $.version
+        jsonEquals: "2.0.0"

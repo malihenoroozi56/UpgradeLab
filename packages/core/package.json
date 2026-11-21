@@ -1,0 +1,28 @@
+{
+  "name": "@upgradelab/core",
+  "version": "1.0.0-dev.0",
+  "description": "Provider-independent execution engine and scenario lifecycle for UpgradeLab.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@upgradelab/contracts": "workspace:*",
+    "pino": "10.4.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "name": "upgradelab",
+  "version": "1.0.0-dev.0",
+  "private": true,
+  "type": "module",
+  "description": "Provider-independent framework for proving that software upgrades preserve user data.",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@10.34.9",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/upgradelab/upgradelab.git"
+  },
+  "keywords": [
+    "upgrade-testing",
+    "data-integrity",
+    "database-migrations",
+    "docker-compose",
+    "testing",
+    "postgresql"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean",
+    "typecheck": "tsc -b --force",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit tests/contract",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "vitest run tests/e2e",
+    "test:security": "vitest run tests/security",
+    "test:docker": "vitest run tests/integration/docker tests/e2e/docker",
+    "test:coverage": "vitest run --coverage",
+    "build:action": "node scripts/build-action.mjs",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "changeset": "changeset",
+    "release": "pnpm build && changeset publish",
+    "verify": "pnpm build && pnpm version:check && pnpm typecheck:test && pnpm lint && pnpm format:check && pnpm test",
+    "typecheck:test": "tsc -p tsconfig.test.json",
+    "version:sync": "node scripts/sync-version.mjs",
+    "version:check": "node scripts/sync-version.mjs --check"
+  },
+  "devDependencies": {
+    "@actions/core": "3.0.1",
+    "@changesets/cli": "3.0.3",
+    "@types/node": "22.20.5",
+    "@types/pg": "8.23.1",
+    "@typescript-eslint/eslint-plugin": "8.73.0",
+    "@typescript-eslint/parser": "8.73.0",
+    "esbuild": "0.28.2",
+    "eslint": "9.39.5",
+    "prettier": "3.10.1",
+    "typescript": "5.9.3",
+    "vite": "8.3.8",
+    "vitepress": "1.6.4",
+    "vitest": "5.1.1",
+    "yaml": "2.9.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

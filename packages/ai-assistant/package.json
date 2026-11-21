@@ -1,0 +1,28 @@
+{
+  "name": "@upgradelab/ai-assistant",
+  "version": "1.0.0-dev.0",
+  "description": "Optional, provider-independent AI diagnostics for UpgradeLab. Advisory only.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@upgradelab/contracts": "workspace:*",
+    "zod": "4.6.7"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

@@ -1,0 +1,85 @@
+name: UpgradeLab
+description: Prove that upgrades preserve user data by running real upgrade scenarios in isolated Docker Compose environments.
+author: UpgradeLab contributors
+branding:
+  icon: shield
+  color: green
+
+# This Action intentionally requests no GitHub token and no permissions.
+# The workflow decides which permissions the job receives; see docs/guides/github-actions.md.
+
+inputs:
+  config:
+    description: Path to the UpgradeLab configuration file, relative to the working directory.
+    required: false
+    default: upgradelab.yaml
+  working-directory:
+    description: Directory containing the configuration and Compose file.
+    required: false
+    default: .
+  scenarios:
+    description: Comma- or newline-separated scenario ids. Empty runs every scenario.
+    required: false
+    default: ""
+  from-image:
+    description: Override the source image of the selected scenarios.
+    required: false
+    default: ""
+  to-image:
+    description: Override the target image of the selected scenarios.
+    required: false
+    default: ""
+  timeout:
+    description: Per-scenario timeout in milliseconds.
+    required: false
+    default: ""
+  report-formats:
+    description: Comma-separated report formats (json, markdown, junit, or a plugin format).
+    required: false
+    default: json,markdown,junit
+  output-dir:
+    description: Directory where reports are written. Upload it with actions/upload-artifact.
+    required: false
+    default: .upgradelab/reports
+  fail-on:
+    description: Comma-separated statuses that fail the step (passed, failed, inconclusive, cancelled).
+    required: false
+    default: failed,inconclusive
+  ai:
+    description: Enable optional AI diagnostics for this run. Advisory only; requires an API key in the environment.
+    required: false
+    default: "false"
+  ai-provider:
+    description: AI provider (openai, anthropic, gemini, openai-compatible).
+    required: false
+    default: ""
+  ai-model:
+    description: AI model name.
+    required: false
+    default: ""
+  plugin:
+    description: Comma-separated plugin module paths to load (advanced; plugins execute code in the runner).
+    required: false
+    default: ""
+  verbose:
+    description: Enable debug logging.
+    required: false
+    default: "false"
+
+outputs:
+  run-id:
+    description: Unique identifier of this execution.
+  status:
+    description: PASSED, FAILED, INCONCLUSIVE or CANCELLED.
+  report-dir:
+    description: Absolute directory containing the generated reports.
+  json-report:
+    description: Absolute path of the JSON report, when generated.
+  markdown-report:
+    description: Absolute path of the Markdown report, when generated.
+  junit-report:
+    description: Absolute path of the JUnit XML report, when generated.
+
+runs:
+  using: node24
+  main: apps/github-action/dist/index.js

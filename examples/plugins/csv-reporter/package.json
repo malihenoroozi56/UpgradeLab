@@ -1,0 +1,29 @@
+{
+  "name": "@upgradelab/plugin-example-csv-reporter",
+  "version": "1.0.0-dev.0",
+  "private": true,
+  "description": "Example UpgradeLab plugin that adds a CSV report format without modifying Core.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@upgradelab/contracts": "workspace:*"
+  },
+  "peerDependencies": {
+    "@upgradelab/plugin-sdk": "workspace:*"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

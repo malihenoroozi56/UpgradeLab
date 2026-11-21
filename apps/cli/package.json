@@ -1,0 +1,39 @@
+{
+  "name": "@upgradelab/cli",
+  "version": "1.0.0-dev.0",
+  "description": "UpgradeLab command-line interface.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "bin": {
+    "upgradelab": "./dist/bin.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@upgradelab/ai-assistant": "workspace:*",
+    "@upgradelab/assertion-engine": "workspace:*",
+    "@upgradelab/config": "workspace:*",
+    "@upgradelab/contracts": "workspace:*",
+    "@upgradelab/core": "workspace:*",
+    "@upgradelab/database-postgres": "workspace:*",
+    "@upgradelab/docker-compose-provider": "workspace:*",
+    "@upgradelab/plugin-sdk": "workspace:*",
+    "@upgradelab/reporters": "workspace:*",
+    "commander": "15.1.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
